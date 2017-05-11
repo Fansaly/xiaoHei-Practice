@@ -1,0 +1,33 @@
+# 屏蔽独显
+# 原补丁: [gfx0] Disable from _REG (DSDT)
+# 修改表: DSDT.dsl
+# -------------------------------------------------------------------------
+into method label _REG parent_hid PNP0C09 insert
+begin
+//added to turn nvidia/radeon off\n
+If (LAnd(LEqual(Arg0,3),LEqual(Arg1,1)))\n
+{\n
+    External(\_SB.PCI0.PEG0.PEGP._OFF, MethodObj)\n
+    \_SB.PCI0.PEG0.PEGP._OFF()\n
+}\n
+end;
+
+
+# 屏蔽独显
+# 原补丁: [gfx0] Disable/Enable on_WAK/_PTS (DSDT)
+# 修改表: DSDT.dsl
+# -------------------------------------------------------------------------
+into method label _PTS code_regex ([\s\S]*) replace_matched
+begin
+External(\\_SB.PCI0.PEG0.PEGP._ON, MethodObj)\n
+If (CondRefOf(\\_SB.PCI0.PEG0.PEGP._ON)) { \\_SB.PCI0.PEG0.PEGP._ON() }\n
+%1
+end;
+
+into method label _WAK code_regex (Return\s+\(.*) replace_matched
+begin
+External(\\_SB.PCI0.PEG0.PEGP._OFF, MethodObj)\n
+If (CondRefOf(\\_SB.PCI0.PEG0.PEGP._OFF)) { \\_SB.PCI0.PEG0.PEGP._OFF() }\n
+%1
+end;
+
