@@ -2,7 +2,7 @@
 
     修炼目标
     mac OS: macOS Sierra 10.12.4
-    SMBIOS: MacBookAir6,2
+    SMBIOS: MacBookPro11,2
 
 [小黑原形](http://www.lenovo.com.cn/product/50081.html "LENOVO 小新 V2000 Bigger 版")如下 :sparkles:
 
@@ -16,6 +16,7 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
 声卡 | Conexant CX20751/2
 有线网卡 | Realtek RTL8168/8111 PCI-E `Realtek RTL8168GU`
 无线网卡 | Intel(R) Dual Band Wireless-AC 3160
+蓝牙 | 英特尔(R) 无线 Bluetooth(R) `USB\VID_8087&PID_07DC&REV_0001`
 触控板 | ELAN
 
 &nbsp;
@@ -73,7 +74,7 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
 
 -   **声卡**  
     `Conexant CX20751/2`  
-    注入 layout-id  
+    :bulb: 注入 layout-id  
     修改的表: `DSDT.dsl`  
     参考补丁: `[audio] Audio Layout 12`  
     完成补丁: [:page_facing_up:](audio.txt)
@@ -91,8 +92,12 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
     `Realtek RTL8168GU`  
     驱动文件: [RealtekRTL8111.kext](https://bitbucket.org/RehabMan/os-x-realtek-network/downloads)
 
--   ~~***无线网卡／蓝牙***~~ :ghost:  
+-   ~~***无线网卡***~~ :ghost:  
     ~~*`Intel(R) Dual Band Wireless-AC 3160`*~~
+
+-   **蓝牙**  
+    `英特尔(R) 无线 Bluetooth(R) USB\VID_8087&PID_07DC&REV_0001`  
+    it's working ^\_^
 
 
 -   **键盘／触摸板**  
