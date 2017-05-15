@@ -4,6 +4,8 @@
     mac OS: macOS Sierra 10.12.4
     SMBIOS: MacBookPro11,2
 
+    使用 Vue, iView 构建的 GitHub 上 maciasl patch 的预览
+
 [小黑原形](http://www.lenovo.com.cn/product/50081.html "LENOVO 小新 V2000 Bigger 版")如下 :sparkles:
 
 设备 | 型号
@@ -53,19 +55,19 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
     * 重命名节点 GFX0 -> IGPU  
     修改的表: `DSDT.dsl` `SSDT-1.dsl` `SSDT-3.dsl` `SSDT-4.dsl` `SSDT.dsl`  
     参考补丁: `[igpu] rename GFX0 to IGPU`  
-    完成补丁: [:page_facing_up:](graphics_rename_node.txt) `核心未做修改`
+    完成补丁: [:page_facing_up:](patches/graphics_rename_node.txt) `核心未做修改`
 
     * 屏蔽独显  
     修改的表: `DSDT.dsl`  
     参考补丁: `[gfx0] Disable from _REG (DSDT)`  
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
              `[gfx0] Disable/Enable on_WAK/_PTS (DSDT)`  
-    完成补丁: [:page_facing_up:](graphics_disable_nv.txt) `核心未做修改`
+    完成补丁: [:page_facing_up:](patches/graphics_disable_nv.txt) `核心未做修改`
 
     * 注入集显 device-id, ig-platform-id  
     修改的表: `SSDT-3.dsl`  
     参考补丁: `[igpu] Haswell HD4400/HD4600/HD5000`  
-    完成补丁: [:page_facing_up:](graphics_inject_id.txt)
+    完成补丁: [:page_facing_up:](patches/graphics_inject_id.txt)
 
         id 获取 `两种途径`:
         [tonymacx86](https://www.tonymacx86.com/threads/fix-intel-hd4200-hd4400-hd4600-mobile-on-yosemite.145427/)
@@ -77,7 +79,7 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
     :bulb: 注入 layout-id  
     修改的表: `DSDT.dsl`  
     参考补丁: `[audio] Audio Layout 12`  
-    完成补丁: [:page_facing_up:](audio.txt)
+    完成补丁: [:page_facing_up:](patches/audio.txt)
 
     layout-id: [查看](https://github.com/vit9696/AppleALC/wiki/Supported-codecs)
 
@@ -109,14 +111,14 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
     :bulb: 加载原生 AppleLPC  
     修改的表: `DSDT.dsl`  
     参考补丁: `[sys] Haswell LPC`  
-    完成补丁: [:page_facing_up:](lpc.txt)
+    完成补丁: [:page_facing_up:](patches/lpc.txt)
 
     id 查找方法: [查看](http://bbs.pcbeta.com/viewthread-1473630-1-1.html)
 
 -   **亮度**  
     修改的表: `SSDT-3.dsl`  
     参考补丁: `[igpu] Brightness fix (Haswell/Broadwell)`  
-    完成补丁: [:page_facing_up:](brightness.txt) `核心未做修改`
+    完成补丁: [:page_facing_up:](patches/brightness.txt) `核心未做修改`
 
     驱动制作:
     1. [修复 macOS 10.12.4 较早版本的亮度](https://www.tonymacx86.com/threads/guide-patching-dsdt-ssdt-for-laptop-backlight-control.152659/)
@@ -129,7 +131,7 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
 -   **电池**  
     :bulb: 电池状态  
     修改的表: `DSDT.dsl`  
-    完成补丁: [:page_facing_up:](battery.txt)  
+    完成补丁: [:page_facing_up:](patches/battery.txt)  
     驱动文件: [ACPIBatteryManager.kext](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/)
 
     补丁制作:
@@ -145,7 +147,7 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
     :bulb: 加载原生 USB 3.0 驱动，解决睡眠立即自动唤醒等问题  
     修改的表: `DSDT.dsl`  
     参考补丁: `[usb] 7-series/8-series USB`  
-    完成补丁: [:page_facing_up:](usb.txt) `核心未做修改`
+    完成补丁: [:page_facing_up:](patches/usb.txt) `核心未做修改`
 
 -   **_睡眠_**  
     :heavy_multiplication_x:...:heavy_multiplication_x: *(我先去睡会...)*
