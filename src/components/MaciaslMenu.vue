@@ -1,25 +1,28 @@
 <template>
-    <Menu :theme="config.theme" @on-select="select">
-        <div class="layout-logo-left"></div>
+    <Row type="flex" class="aside">
+        <Menu :theme="config.theme" @on-select="select">
+            <div class="layout-logo-left"></div>
 
-        <!-- 分类 -->
-        <Submenu v-for="(menu, menuIndex) in menus" :name="name(menuIndex)">
-            <template slot="title">
-                <Icon type="more"></Icon>
-                {{ menu.patchName }}
-            </template>
+            <!-- 分类 -->
+            <Submenu v-for="(menu, menuIndex) in menus" :key="name(menuIndex)" :name="name(menuIndex)">
+                <template slot="title">
+                    <Icon type="more"></Icon>
+                    {{ menu.patchName }}
+                </template>
 
-            <!-- 列表 -->
-            <Menu-item v-for="(item, itemIndex) in menu.items"
-                :title="item.name"
-                :name="name(menuIndex, itemIndex)"
-                :class="{'no-file': !item.hasFile}">
+                <!-- 列表 -->
+                <Menu-item v-for="(item, itemIndex) in menu.items"
+                    :key="name(menuIndex, itemIndex)"
+                    :name="name(menuIndex, itemIndex)"
+                    :class="{'no-file': !item.hasFile}"
+                    :title="item.name">
 
-                <Icon type="chevron-down" v-if="!item.hasFile"></Icon>
-                <span>{{ item.name }}</span>
-            </Menu-item>
-        </Submenu>
-    </Menu>
+                    <Icon type="chevron-down" v-if="!item.hasFile"></Icon>
+                    <span>{{ item.name }}</span>
+                </Menu-item>
+            </Submenu>
+        </Menu>
+    </Row>
 </template>
 <script>
 export default {
@@ -32,13 +35,13 @@ export default {
     },
     methods: {
         name (index, _index) {
-            return  typeof _index !== 'undefied'
-                    ? index + this.symbol + _index
-                    : index + ''
+            return typeof _index !== 'undefined'
+                   ? index + this.symbol + _index
+                   : index + ''
         },
         select (name) {
             this.$emit('update', {
-                index:  name,
+                index: name,
                 symbol: this.symbol
             })
         }
@@ -46,7 +49,38 @@ export default {
 }
 </script>
 <style>
-.ivu-menu-vertical.ivu-menu:before,
+.aside {
+    padding-bottom: 40px;
+    width: 22%;
+    min-width: 300px;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: all .3s .1s ease;
+}
+.init .aside {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-100px);
+    transition-delay: .16s;
+}
+.layout-light .aside {
+    background-color: #fff;
+}
+.layout-light .aside:after {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    content: '';
+    background-color: #d7dde4;
+}
+.layout-dark .aside {
+    background-color: #464c5b;
+}
+.aside,
 .ivu-menu-vertical .ivu-menu-submenu,
 .ivu-menu-vertical .ivu-menu-submenu-title,
 .ivu-menu-vertical .ivu-menu-item,
@@ -56,36 +90,16 @@ export default {
     transition: all .5s ease;
 }
 .ivu-menu-vertical.ivu-menu {
-    padding-bottom: 40px;
-    width: 22% !important;
+    width: 100% !important;
     min-width: 300px !important;
     height: 100%;
-    background-color: transparent;
+    background-color: transparent !important;
     overflow: auto;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    transition: all .3s .1s ease;
 }
-.ivu-menu-vertical.ivu-menu:before {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    content: '';
-}
-.ivu-menu-light.ivu-menu:before {
-    background-color: #fff;
-}
-.ivu-menu-dark.ivu-menu:before {
-    background-color: #464c5b;
-}
-.init .ivu-menu-vertical.ivu-menu {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(-100px);
-    transition-delay: .16s;
+.ivu-menu-light.ivu-menu:after {
+    width: 0;
+    height: 0;
+    background-color: transparent;
 }
 .layout-logo-left{
     width: 90%;

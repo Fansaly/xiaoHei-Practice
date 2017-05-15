@@ -24,7 +24,7 @@ export default {
     },
     watch: {
         'data.hasFile': function (val) {
-            this.file = val ? val : ''
+            this.file = val || ''
         }
     }
 }

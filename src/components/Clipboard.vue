@@ -13,6 +13,7 @@
  */
 import Clipboard from 'clipboard'
 
+/* eslint-disable no-new */
 new Clipboard('#clipboard')
 
 export default {
@@ -25,19 +26,13 @@ export default {
     },
     methods: {
         copyToClipboard () {
-
             if (!/[^\s]/.test(this.context)) {
-
                 this.$Message.warning('没有内容需要拷贝。')
 
                 return false
-
             } else if (this.hasCopied) {
-
                 return false
-
             } else {
-
                 this.hasCopied = true
 
                 this.$Message.success('代码已拷贝至剪切板。', 2, () => {

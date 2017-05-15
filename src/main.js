@@ -10,16 +10,13 @@ import Maciasl from './Maciasl'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-
 Vue.config.productionTip = false
-
 
 Vue.use(iView)
 Vue.use(VueAxios, axios)
 
-
 /* eslint-disable no-new */
-var layoutView = new Vue({
+new Vue({
     el: '#layoutView',
     template: '<Maciasl/>',
     components: {

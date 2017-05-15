@@ -11,13 +11,13 @@
                     <Context ref="context" :data="data"></Context>
                 </div>
 
-                <div class="layout-copy">2017 &copy; fansaly</div>
+                <div class="layout-copy"><span>2017 &copy; fansaly</span></div>
             </Row>
-        </Row>
 
-        <div class="config">
-            <i-switch v-model="config.eye" @on-change="configure"></i-switch>
-        </div>
+            <div class="config">
+                <i-switch v-model="config.eye" @on-change="configure"></i-switch>
+            </div>
+        </Row>
 
         <Loading ref="loading"></Loading>
     </Row>
@@ -31,8 +31,8 @@ import Context from './components/Context'
 
 import maciasl from './components/maciasl.json'
 
-let theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light',
-    eye   = localStorage.getItem('eye')   === 'true' ? true   : false
+const eye = localStorage.getItem('eye') === 'true'
+const theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'
 
 export default {
     name: 'Maciasl',
@@ -40,8 +40,8 @@ export default {
         return {
             isInit: true,
             config: {
-                eye: eye,
-                theme: theme
+                eye,
+                theme
             },
             menus: [],
             data: {}
@@ -57,19 +57,18 @@ export default {
         config: {
             handler: function () {
                 localStorage.setItem('theme', this.config.theme)
-                localStorage.setItem('eye',   this.config.eye)
+                localStorage.setItem('eye', this.config.eye)
             },
             deep: true
         },
-        menus: function(val, oldVal) {
+        menus: function (val, oldVal) {
             // console.log(val, oldVal)
         }
     },
     methods: {
         getMaciasl () {
-
             for (let i = 0; i <= maciasl.length - 1; i++) {
-                let d = maciasl[i]
+                const d = maciasl[i]
 
                 this.tranlateUrl = d
 
@@ -80,7 +79,7 @@ export default {
                 this.$Loading.start()
 
                 this.axios.get(d.hasMaciasl)
-                    .then( (response) => {
+                    .then((response) => {
                         d.text = response.data
 
                         this.formatItems = d
@@ -88,20 +87,18 @@ export default {
                         this.$Loading.finish()
 
                         this.updateMenu(d)
-
                     })
-                    .catch( (error) => {
+                    .catch((error) => {
                         console.log(error)
                         this.$Loading.error()
                     })
             }
-
         },
         updateMenu (data) {
             this.menus.push(data)
 
             if (this.isInit) {
-                setTimeout( () => {
+                setTimeout(() => {
                     this.isInit = false
                 }, 800)
             }
@@ -116,15 +113,11 @@ export default {
         },
         configure (status) {
             if (status) {
-
                 this.config.theme = 'dark'
-
-                this.$Message.info('开启护眼模式');
+                this.$Message.info('开启护眼模式')
             } else {
-
                 this.config.theme = 'light'
-
-                this.$Message.info('关闭护眼模式');
+                this.$Message.info('关闭护眼模式')
             }
 
             this.config.eye = status
@@ -135,28 +128,27 @@ export default {
     },
     computed: {
         theme: {
-            get: function() {
+            get: function () {
                 return ('layout-' + this.config.theme)
             }
         },
         getData: {
-            get: function() {
+            get: function () {
                 return
             },
             set: function (data) {
+                const index = data.index.split(data.symbol)
+                const menu = this.menus[index[0]]
+                const item = menu.items[index[1]]
 
-                let index = data.index.split(data.symbol),
-                    menu = this.menus[index[0]],
-                    item = menu.items[index[1]]
-
-                let d = {
-                    url:        menu.url,
-                    domain:     menu.domain,
-                    author:     menu.author,
-                    patchName:  menu.patchName,
-                    hasFile:    !!item && !!item.hasFile
-                                ? item.hasFile
-                                : false
+                const d = {
+                    url: menu.url,
+                    domain: menu.domain,
+                    author: menu.author,
+                    patchName: menu.patchName,
+                    hasFile: !!item && !!item.hasFile
+                             ? item.hasFile
+                             : false
                 }
 
                 if (d.hasFile) {
@@ -167,18 +159,17 @@ export default {
             }
         },
         tranlateUrl: {
-            get: function() {
+            get: function () {
                 return
             },
             set: function (data) {
                 // http://raw.github.com/RehabMan/Laptop-DSDT-Patch/master
-                let reg = /(http(s)?):\/\/([\w\-_]+)\.([\w\-_]+\.[\w\-_]+)+(.*)(\/?)/
+                const reg = /(http(s)?):\/\/([\w\-_]+)\.([\w\-_]+\.[\w\-_]+)+(.*)(\/?)/
 
                 let o = data.maciaslURL.replace(reg, function ($0, $1, $2, $3, $4, $5) {
-
                     return JSON.stringify({
-                        protocol:  $1,
-                        domain:    $4,
+                        protocol: $1,
+                        domain: $4,
                         secondary: $3,
                         remaining: $5
                     })
@@ -188,47 +179,36 @@ export default {
 
                 data.domain = o.domain
 
-                if (o.domain == 'github.com') {
+                if (o.domain === 'github.com') {
                     // https://raw.githubusercontent.com/RehabMan/Laptop-DSDT-Patch/master/.maciasl
-                    data.hasMaciasl = ''
-                        + 'https://'
-                        + o.secondary
-                        + '.githubusercontent.com'
-                        + o.remaining
-                        + '/.maciasl'
+                    data.hasMaciasl = `https://${o.secondary}.githubusercontent.com${o.remaining}/.maciasl`
 
                     // https://github.com/RehabMan/Laptop-DSDT-Patch
-                    data.url = ''
-                        + 'https://'
-                        + o.domain
-                        + o.remaining.replace(/\/?master$/i, '')
-
+                    data.url = `https://${o.domain}${o.remaining.replace(/\/?master$/i, '')}`
                 } else {
                     data.hasMaciasl = false
                 }
-
             }
         },
         formatItems: {
-            get: function() {
+            get: function () {
                 return
             },
             set: function (data) {
-                let d = data.text.split(/\n/)
+                const d = data.text.split(/\n/)
 
                 for (let i = d.length - 1; i >= 0; i--) {
-
-                    if ( !/[^\s]/.test(d[i]) ) {
+                    if (!/[^\s]/.test(d[i])) {
                         continue
                     }
 
-                    let o = d[i].replace(/(.*)[\s]+(.*)/, function ($0, $1, $2) {
+                    const o = d[i].replace(/(.*)[\s]+(.*)/, function ($0, $1, $2) {
                         if (!(!!$1 & !!$2)) {
                             return false
                         }
 
                         return JSON.stringify({
-                            name:    $1,
+                            name: $1,
                             hasFile: /[^(NullPatch.txt)]/i.test($2)
                                      ? $2
                                      : false
@@ -270,7 +250,6 @@ export default {
 }
 
 .ivu-row-flex.layout-container {
-    padding-bottom: 4px;
     flex-direction: column;
     flex: 1;
     opacity: 1;
@@ -306,8 +285,11 @@ export default {
 
 .layout-copy{
     text-align: center;
-    padding: 10px 0 20px;
     color: #9ea7b4;
+}
+.layout-copy span {
+    display: inline-block;
+    padding: 10px 0 24px;
 }
 
 .config {

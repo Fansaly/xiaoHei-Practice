@@ -20,31 +20,27 @@ export default {
     },
     watch: {
         data: function (val, oldVal) {
-
             // 有文件地址，不为同一地址时，获取文件内容
             if (val.fileURL && val.fileURL !== oldVal.fileURL) {
-
                 this.getContext()
 
             // 文件地址不存在，文件作者不同时，清空内容区内容
             } else if (!val.fileURL && val.author !== oldVal.author) {
-
                 this.context = ''
             }
         }
     },
     methods: {
         getContext () {
-
             this.$Loading.start()
 
             this.axios
                 .get(this.data.fileURL)
-                .then( (response) => {
+                .then((response) => {
                     this.context = response.data
                     this.$Loading.finish()
                 })
-                .catch( (error) => {
+                .catch((error) => {
                     console.log(error)
                     this.$Loading.error()
                 })
@@ -76,5 +72,11 @@ export default {
 }
 .ivu-input-wrapper {
     height: 100%;
+}
+@media screen and (max-height: 400px) {
+    .layout-content,
+    .layout-context textarea {
+        min-height: auto !important;
+    }
 }
 </style>
