@@ -25,12 +25,10 @@ export default {
     width: 100%;
     height: 100%;
     opacity: 0;
-    visibility: hidden;
     transition: all .6s ease;
 }
 .init #loading {
     opacity: 1;
-    visibility: visible;
 }
 .demo-spin-col {
     height: 100%;

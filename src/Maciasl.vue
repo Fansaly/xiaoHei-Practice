@@ -19,7 +19,9 @@
             </div>
         </Row>
 
-        <Loading ref="loading"></Loading>
+        <transition>
+            <Loading v-if="isInit"></Loading>
+        </transition>
     </Row>
 </template>
 
@@ -179,7 +181,7 @@ export default {
 
                 data.domain = o.domain
 
-                if (o.domain === 'github.com') {
+                if (data.domain === 'github.com') {
                     // https://raw.githubusercontent.com/RehabMan/Laptop-DSDT-Patch/master/.maciasl
                     data.hasMaciasl = `https://${o.secondary}.githubusercontent.com${o.remaining}/.maciasl`
 
@@ -209,7 +211,7 @@ export default {
 
                         return JSON.stringify({
                             name: $1,
-                            hasFile: /[^(NullPatch.txt)]/i.test($2)
+                            hasFile: /[^(NullPatch\.txt)]/i.test($2)
                                      ? $2
                                      : false
                         })

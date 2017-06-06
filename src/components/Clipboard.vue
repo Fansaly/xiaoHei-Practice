@@ -1,7 +1,11 @@
 <template>
-    <span id="clipboard" :class="{cpied: hasCopied}" @click="copyToClipboard" :data-clipboard-text="context">
-        <Icon type="checkmark" v-show="hasCopied"></Icon>
-        <Icon type="clipboard" v-show="!hasCopied"></Icon>
+    <span class="clipboard">
+        <span v-show="hasCopied">
+            <Icon type="checkmark"></Icon>
+        </span>
+        <span v-show="!hasCopied" @click="copyToClipboard" id="clipboard" :data-clipboard-text="context">
+            <Icon type="clipboard"></Icon>
+        </span>
     </span>
 </template>
 <script>
@@ -28,10 +32,6 @@ export default {
         copyToClipboard () {
             if (!/[^\s]/.test(this.context)) {
                 this.$Message.warning('没有内容需要拷贝。')
-
-                return false
-            } else if (this.hasCopied) {
-                return false
             } else {
                 this.hasCopied = true
 
@@ -44,27 +44,27 @@ export default {
 }
 </script>
 <style>
-#clipboard {
+.clipboard {
     position: absolute;
-    padding: 2px 4px;
     top: 18px;
     right: 18px;
     font-size: 18px;
     line-height: 1;
-    cursor: pointer;
+    cursor: default;
     overflow: hidden;
 }
-#clipboard.cpied {
-    cursor: default;
+.clipboard span {
+    padding: 2px 4px;
 }
-#clipboard .ivu-icon-checkmark {
+.clipboard .ivu-icon-checkmark {
     color: #16bf27;
 }
-#clipboard .ivu-icon-clipboard {
+#clipboard {
     color: #999;
+    cursor: pointer;
     transition: color .22s ease;
 }
-#clipboard .ivu-icon-clipboard:hover {
+#clipboard:hover {
     color: #666;
 }
 </style>

@@ -57,6 +57,7 @@ export default {
     visibility: visible;
     transform: none;
     transition: all .3s .1s ease;
+    flex-flow: 1;
 }
 .init .aside {
     opacity: 0;
