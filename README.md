@@ -230,6 +230,14 @@ reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsU
 
 &nbsp;
 
+完成进度 :open_mouth:
+
+&nbsp;
+
+![progress](progress/progress.png)
+
+&nbsp;
+
 The end. Enjoy :innocent:
 
 &nbsp;
