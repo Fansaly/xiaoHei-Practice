@@ -1,16 +1,23 @@
 ## 小黑修炼记
 
     修炼目标
-    mac OS: macOS Sierra 10.12.5
+     macOS: macOS Sierra 10.12.5
     SMBIOS: MacBookPro11,2
 
     使用 Vue, iView 构建的 GitHub 上 maciasl patch 的预览
+
+## 完成进度 :open_mouth:
+![progress](progress/progress.png)
+
+&nbsp;
+
+---
 
 [小黑原形](http://www.lenovo.com.cn/product/50081.html "LENOVO 小新 V2000 Bigger 版")如下 :sparkles:
 
 设备 | 型号
 :-: | -
-主板 | LENOVO 9BCN29WW
+主板 | Lenovo Lancer 5A5 `BIOS Version: 9BCN29WW`
 主板芯片组 | Intel Lynx Point-LP `南桥`, Intel Haswell `北桥`
 CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
 集显 | Intel HD Graphics 4400 `Haswell-ULT GT2`
@@ -19,8 +26,6 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
 有线 | Realtek RTL8168/8111 PCI-E `Realtek RTL8168GU`
 无线和蓝牙| Intel 3160 AC &nbsp;--<sup>更换为</sup>-->&nbsp; Broadcom BCM4352 802.11AC
 触控板 | ELAN
-
-&nbsp;
 
 ---
 
@@ -227,14 +232,6 @@ USB     | USBInjectAll.kext                  | [bitbucket](https://bitbucket.org
 ```cmd
 reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsUniversal /t REG_DWORD /d 1
 ```
-
-&nbsp;
-
-完成进度 :open_mouth:
-
-&nbsp;
-
-![progress](progress/progress.png)
 
 &nbsp;
 
