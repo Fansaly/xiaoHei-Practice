@@ -34,7 +34,7 @@ export default {
         getContext () {
             this.$Loading.start()
 
-            this.axios
+            this.$axios
                 .get(this.data.fileURL)
                 .then((response) => {
                     this.context = response.data

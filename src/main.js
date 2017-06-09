@@ -8,12 +8,11 @@ import 'iview/dist/styles/iview.css'
 import Maciasl from './Maciasl'
 
 import axios from 'axios'
-import VueAxios from 'vue-axios'
 
+Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 
 Vue.use(iView)
-Vue.use(VueAxios, axios)
 
 /* eslint-disable no-new */
 new Vue({

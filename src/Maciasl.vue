@@ -1,7 +1,7 @@
 <template>
     <Row type="flex" class="layout" :class="[theme, {init: isInit}]">
         <Row type="flex" ref="maciasl" id="maciasl" class="maciasl">
-            <MaciaslMenu ref="menu" :menus="menus" @update="update" :config="config" @destroy="destroy"></MaciaslMenu>
+            <MaciaslMenu ref="menu" :menus="menus" @update="update" :config="config"></MaciaslMenu>
 
             <Row type="flex" class="layout-container">
                 <div class="layout-header"></div>
@@ -62,10 +62,10 @@ export default {
                 localStorage.setItem('eye', this.config.eye)
             },
             deep: true
-        },
-        menus: function (val, oldVal) {
-            // console.log(val, oldVal)
         }
+    },
+    mounted () {
+        this.getMaciasl()
     },
     methods: {
         getMaciasl () {
@@ -80,7 +80,7 @@ export default {
 
                 this.$Loading.start()
 
-                this.axios.get(d.hasMaciasl)
+                this.$axios.get(d.hasMaciasl)
                     .then((response) => {
                         d.text = response.data
 
@@ -109,10 +109,6 @@ export default {
             this.getData = o
             this.data = o.data
         },
-        destroy () {
-            // console.log(this.$refs.loading)
-            this.$refs.loading.$destroy()
-        },
         configure (status) {
             if (status) {
                 this.config.theme = 'dark'
@@ -124,9 +120,6 @@ export default {
 
             this.config.eye = status
         }
-    },
-    beforeCreate () {
-        // console.log('beforeCreate: ', localStorage)
     },
     computed: {
         theme: {
@@ -165,6 +158,7 @@ export default {
                 return
             },
             set: function (data) {
+                // http://maciasl.sourceforge.net
                 // http://raw.github.com/RehabMan/Laptop-DSDT-Patch/master
                 const reg = /(http(s)?):\/\/([\w\-_]+)\.([\w\-_]+\.[\w\-_]+)+(.*)(\/?)/
 
@@ -187,6 +181,12 @@ export default {
 
                     // https://github.com/RehabMan/Laptop-DSDT-Patch
                     data.url = `https://${o.domain}${o.remaining.replace(/\/?master$/i, '')}`
+                } else if (data.domain === 'sourceforge.net') {
+                    // http://maciasl.sourceforge.net/.maciasl
+                    data.hasMaciasl = `${data.maciaslURL}/.maciasl`
+                    data.hasMaciasl = false // cross-origin
+
+                    data.url = ''
                 } else {
                     data.hasMaciasl = false
                 }
@@ -229,9 +229,6 @@ export default {
                 delete data.text
             }
         }
-    },
-    mounted () {
-        this.getMaciasl()
     }
 }
 </script>
@@ -246,6 +243,7 @@ export default {
     margin: 0 auto;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 .maciasl {
     background: #f5f7f9;
