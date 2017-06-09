@@ -53,60 +53,43 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
     :three:[MaciASL](https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/)
 
 
--   **显卡**  
-    `Intel HD4400, Haswell-ULT GT2`  
+-   **首要**  
+    + DSDT.dsl
+    ```
+    "Rename _DSM methods to XDSM"   ==> rename_DSM.txt
+    "IRQ Fix"                       ==> system_IRQ.txt
+    "SMBUS Fix"                     ==> system_SMBUS.txt
+    "RTC Fix"                       ==> system_RTC.txt
+    "OS Check Fix (Windows 8)"      ==> system_OSYS_win8.txt
+    "AC Adapter Fix"                ==> system_ADP1.txt
+    "Fix _WAK Arg0 v2"              ==> system_WAK2.txt
+    "Add IMEI"                      ==> system_IMEI.txt
 
-    * 重命名节点 GFX0 -> IGPU  
-    修改的表: `DSDT.dsl` `SSDT-1.dsl` `SSDT-3.dsl` `SSDT-4.dsl` `SSDT.dsl`  
-    参考补丁: `[igpu] rename GFX0 to IGPU`  
-    完成补丁: [:page_facing_up:](patches/graphics_rename_node.txt) `核心未做修改`
+    "7-series/8-series USB"         ==> usb_7-series.txt
+    "USB3 _PRW 0x6D (instant wake)" ==> usb_prw_0x6d_xhc.txt
 
-    * 屏蔽独显  
-    修改的表: `DSDT.dsl`  
-    参考补丁: `[gfx0] Disable from _REG (DSDT)`  
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-             `[gfx0] Disable/Enable on_WAK/_PTS (DSDT)`  
-    完成补丁: [:page_facing_up:](patches/graphics_disable_nv.txt) `核心未做修改`
+    "Rename GFX0 to IGPU"           ==> graphics_Rename-GFX0.txt
+    "Rename B0D3 to HDAU"           ==> graphics_Rename-B0D3.txt
+    ```
+    + SSDT*.dsl
+    ```
+    "Rename _DSM methods to XDSM"   ==> rename_DSM.txt
+    "Rename GFX0 to IGPU"           ==> graphics_Rename-GFX0.txt
+    "Rename B0D3 to HDAU"           ==> graphics_Rename-B0D3.txt
+    ```
 
-    * 注入集显 device-id, ig-platform-id  
-    修改的表: `SSDT-3.dsl`  
-    参考补丁: `[igpu] Haswell HD4400/HD4600/HD5000`  
-    完成补丁: [:page_facing_up:](patches/graphics_inject_id.txt)
-
-        id 获取 `两种途径`:
-          [tonymacx86](https://www.tonymacx86.com/threads/fix-intel-hd4200-hd4400-hd4600-mobile-on-yosemite.145427/)
-        | [pcbeta](http://bbs.pcbeta.com/viewthread-1465761-1-1.html)
-
-
--   **声卡**  
-    `Conexant CX20751/2`  
-    :bulb: 注入 layout-id  
-    修改的表: `DSDT.dsl`  
-    参考补丁: `[audio] Audio Layout 12`  
-    完成补丁: [:page_facing_up:](patches/audio.txt)
-
-    layout-id: [github](https://github.com/vit9696/AppleALC/wiki/Supported-codecs)
-
-    驱动文件:
-      [AppleALC](https://github.com/vit9696/AppleALC)
-    , [Lilu](https://github.com/vit9696/Lilu)
-    > AppleALC 1.1.1 : Requires Lilu 1.1.0 or newer  
-    > AppleALC 1.1.0 : AppleALC now has its kernel patcher moved to Lilu.kext  
-    > AppleALC 1.0.19: Added Conexant CX20751_2 HDMI/DisplayPort Output fix by syscl
-
-
--   **有线网卡**  
+-   **有线**  
     `Realtek RTL8168GU`  
     驱动文件: [RealtekRTL8111.kext](https://bitbucket.org/RehabMan/os-x-realtek-network/downloads)
 
-
--   ***无线网卡*** :ghost:  
+-   ***无线*** :ghost:  
     *`Broadcom BCM4352 802.11AC (BCM94352Z)`*  
-    :bulb: 在 Windows 操作系统下 [移除白名单](https://www.tonymacx86.com/threads/guide-lenovo-g50-70-and-z50-70-bios-whitelist-removal.187340/)
-    之后，更换新的无线网卡  
+    在 Windows 系统中 [移除白名单](https://www.tonymacx86.com/threads/guide-lenovo-g50-70-and-z50-70-bios-whitelist-removal.187340/)
+    之后，更换新无线网卡  
     驱动文件:
     [FakePCIID_Broadcom_WiFi.kext](https://bitbucket.org/RehabMan/os-x-fake-pci-id/downloads)
     `依赖 FakePCIID.kext`
+
     > **Broadcom WiFi BCM94352 requires additional patches**
     >
     > The patch was created by the-darkvoid.
@@ -120,39 +103,41 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
     >
     > Additional background: [insanelymac](http://www.insanelymac.com/forum/topic/312759-fix-macos-sierra-dp1-bcm94532z-wifi/)
 
--   ***蓝牙*** :ghost:  
+-   ***蓝牙***  
     驱动文件:
       [BrcmFirmwareData.kext](https://bitbucket.org/RehabMan/os-x-brcmpatchram/downloads)
     , [BrcmPatchRAM2.kext](https://bitbucket.org/RehabMan/os-x-brcmpatchram/downloads)
 
+-   **显卡**  
+    `Intel HD4400, Haswell-ULT GT2`  
 
--   **键盘／触摸板**  
-    `ELAN`  
-    驱动文件: [ApplePS2SmartTouchPad.kext](http://forum.osxlatitude.com/index.php?/topic/1948-elan-focaltech-and-synaptics-smart-touchpad-driver-mac-os-x/)
+    * 注入集显 device-id, ig-platform-id  
+    修改的表: `SSDT-3.dsl`  
+    参考补丁: `[igpu] Haswell HD4400/HD4600/HD5000`  
+    完成补丁: [:page_facing_up:](patches/graphics_Haswell_0a260006.txt) `有修改`
 
+        id 获取 `两种途径`:
+          [tonymacx86](https://www.tonymacx86.com/threads/fix-intel-hd4200-hd4400-hd4600-mobile-on-yosemite.145427/)
+        | [pcbeta](http://bbs.pcbeta.com/viewthread-1465761-1-1.html)
 
--   **电源管理**  
-    :bulb: 加载原生 AppleLPC  
+    * 屏蔽独显  
     修改的表: `DSDT.dsl`  
-    参考补丁: `[sys] Haswell LPC`  
-    完成补丁: [:page_facing_up:](patches/lpc.txt)
-
-    id 查找方法: [pcbeta](http://bbs.pcbeta.com/viewthread-1473630-1-1.html)
+    参考补丁: `[gfx0] Disable from _REG (DSDT)`  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             `[gfx0] Disable/Enable on_WAK/_PTS (DSDT)`  
+    完成补丁: [:page_facing_up:](patches/graphics_disable_nv.txt)
 
 -   **亮度**  
     修改的表: `SSDT-3.dsl`  
     参考补丁: `[igpu] Brightness fix (Haswell/Broadwell)`  
-    完成补丁: [:page_facing_up:](patches/brightness.txt) `核心未做修改`
+    完成补丁: [:page_facing_up:](patches/graphics_PNLF_haswell.txt)
 
     驱动制作:
-    1. [修复 macOS 10.12.4 较早版本的亮度](https://www.tonymacx86.com/threads/guide-patching-dsdt-ssdt-for-laptop-backlight-control.152659/)
-    2. 需要这里的
-    [PatchAppleBacklight_v2.zip](https://www.tonymacx86.com/threads/native-brightness-working-without-blinkscreen-using-patched-applebacklight-kext.121031/)
-    文件
-    3. [修复 macOS 10.12.4 版本的亮度](https://www.tonymacx86.com/threads/guide-laptop-backlight-control-using-applebacklightinjector-kext.218222/)
-    `获得制作的两个文件 •SSDT-PNLF.aml •AppleBacklightInjector.kext`
+    [修复 macOS 10.12.4 版本的亮度](https://www.tonymacx86.com/threads/guide-laptop-backlight-control-using-applebacklightinjector-kext.218222/)
+    `获得制作的文件 •SSDT-PNLF.aml •AppleBacklightInjector.kext`
 
-    **Additional**
+    > **Clover _config.plist_**  
+    >
     > The patch was created by RehabMan.
     >
     > eg. in KextsToPatch:  
@@ -163,11 +148,30 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
     >
     > Additional background of *Installation*: [tonymacx86](https://www.tonymacx86.com/threads/guide-laptop-backlight-control-using-applebacklightinjector-kext.218222/)
 
+-   **声卡**  
+    `Conexant CX20751/2`  
+    修改的表: `DSDT.dsl`  
+    参考补丁: `[audio] Audio Layout 12`  
+    完成补丁: [:page_facing_up:](patches/audio_HDEF-layout.txt) `有修改`
+
+    layout-id: [github](https://github.com/vit9696/AppleALC/wiki/Supported-codecs)
+
+    驱动文件:
+      [AppleALC](https://github.com/vit9696/AppleALC)
+    , [Lilu](https://github.com/vit9696/Lilu)
+    > AppleALC 1.1.1 : Requires Lilu 1.1.0 or newer  
+    > AppleALC 1.1.0 : AppleALC now has its kernel patcher moved to Lilu.kext  
+    > AppleALC 1.0.19: Added Conexant CX20751_2 HDMI/DisplayPort Output fix by syscl
+
+-   **睿频**  
+    `Intel i7-4510U CPU @ 2.00GHz Turbo 3.1GHz`  
+    脚本: [ssdtPRGen.sh](https://github.com/Piker-Alpha/ssdtPRGen.sh)
 
 -   **电池**  
-    :bulb: 电池状态  
     修改的表: `DSDT.dsl`  
-    完成补丁: [:page_facing_up:](patches/battery.txt)  
+    参考补丁: `[bat] Lenovo Z50-70`  
+    完成补丁: [:page_facing_up:](patches/battery_Lenovo-Z50-70.txt)
+    | 自己制作的 [:page_facing_up:](patches/battery.txt)  
     驱动文件: [ACPIBatteryManager.kext](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/)
 
     补丁制作:
@@ -175,18 +179,13 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
     | [pcbeta](http://bbs.pcbeta.com/viewthread-1521462-1-1.html)
       `(后者为前者的中译版)`
 
--   **睿频**  
-    `Intel i7-4510U CPU @ 2.00GHz Turbo 3.1GHz`  
-    脚本: [ssdtPRGen.sh](https://github.com/Piker-Alpha/ssdtPRGen.sh)
+-   **USB、睡眠、唤醒**  
+    我想已经正常工作了 :wink:
 
--   **USB**  
-    :bulb: 加载原生 USB 3.0 驱动，解决睡眠立即自动唤醒等问题  
-    修改的表: `DSDT.dsl`  
-    参考补丁: `[usb] 7-series/8-series USB`  
-    完成补丁: [:page_facing_up:](patches/usb.txt) `核心未做修改`
-
--   **_睡眠_**  
-    :heavy_multiplication_x:...:heavy_multiplication_x: *(我先去睡会...)*
+-   **键盘、触摸板**  
+    `ELAN`  
+    驱动文件:
+    [ApplePS2SmartTouchPad.kext](http://forum.osxlatitude.com/index.php?/topic/1948-elan-focaltech-and-synaptics-smart-touchpad-driver-mac-os-x/)
 
 ---
 
