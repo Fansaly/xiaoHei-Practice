@@ -170,8 +170,9 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
 -   **电池**  
     修改的表: `DSDT.dsl`  
     参考补丁: `[bat] Lenovo Z50-70`  
-    完成补丁: [:page_facing_up:](patches/battery_Lenovo-Z50-70.txt)
-    | 自己制作的 [:page_facing_up:](patches/battery.txt)  
+    完成补丁:
+      自己制作 [:page_facing_up:](patches/battery.txt)
+    | RehabMan [:page_facing_up:](patches/battery_Lenovo-Z50-70.txt)  
     驱动文件: [ACPIBatteryManager.kext](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/)
 
     补丁制作:
