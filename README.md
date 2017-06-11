@@ -52,6 +52,7 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
     :two:[patchmatic](https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/)
     :three:[MaciASL](https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/)
 
+    本例的 DSDT/SSDTs，由 patchmatic 在只有 FakeSMC.kext 与 config.list 空白的情形下提取而来
 
 -   **首要**  
     + DSDT.dsl
@@ -65,17 +66,16 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
     "Fix _WAK Arg0 v2"              ==> system_WAK2.txt
     "Add IMEI"                      ==> system_IMEI.txt
 
-    "7-series/8-series USB"         ==> usb_7-series.txt
-    "USB3 _PRW 0x6D (instant wake)" ==> usb_prw_0x6d_xhc.txt
-
     "Rename GFX0 to IGPU"           ==> graphics_Rename-GFX0.txt
-    "Rename B0D3 to HDAU"           ==> graphics_Rename-B0D3.txt
+    "Rename B0D3 to HDAU"           ==> graphics_Rename-B0D3.txt（有修改）
+
+    "USB3 _PRW 0x6D (instant wake)" ==> usb_prw_0x6d_xhc.txt    （有修改）
     ```
     + SSDT*.dsl
     ```
     "Rename _DSM methods to XDSM"   ==> rename_DSM.txt
     "Rename GFX0 to IGPU"           ==> graphics_Rename-GFX0.txt
-    "Rename B0D3 to HDAU"           ==> graphics_Rename-B0D3.txt
+    "Rename B0D3 to HDAU"           ==> graphics_Rename-B0D3.txt（有修改）
     ```
 
 -   **有线**  
@@ -116,7 +116,7 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
     参考补丁: `[igpu] Haswell HD4400/HD4600/HD5000`  
     完成补丁: [:page_facing_up:](patches/graphics_Haswell_0a260006.txt) `有修改`
 
-        id 获取 `两种途径`:
+        id 获取:
           [tonymacx86](https://www.tonymacx86.com/threads/fix-intel-hd4200-hd4400-hd4600-mobile-on-yosemite.145427/)
         | [pcbeta](http://bbs.pcbeta.com/viewthread-1465761-1-1.html)
 
@@ -136,7 +136,7 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
     [修复 macOS 10.12.4 版本的亮度](https://www.tonymacx86.com/threads/guide-laptop-backlight-control-using-applebacklightinjector-kext.218222/)
     `获得制作的文件 •SSDT-PNLF.aml •AppleBacklightInjector.kext`
 
-    > **Clover _config.plist_**  
+    > **Brightness requires additional patches**  
     >
     > The patch was created by RehabMan.
     >
@@ -171,8 +171,8 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
     修改的表: `DSDT.dsl`  
     参考补丁: `[bat] Lenovo Z50-70`  
     完成补丁:
-      自己制作 [:page_facing_up:](patches/battery.txt)
-    | RehabMan [:page_facing_up:](patches/battery_Lenovo-Z50-70.txt)  
+      RehabMan [:page_facing_up:](patches/battery_Lenovo-Z50-70.txt)
+    | 自己制作 [:page_facing_up:](patches/battery_Lenovo-v2000.txt)  
     驱动文件: [ACPIBatteryManager.kext](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/)
 
     补丁制作:
