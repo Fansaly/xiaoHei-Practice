@@ -144,11 +144,11 @@ cp config.plist /Volumes/EFI/EFI/Clover/config.plist
 
 请务必访问「[已知问题](#已知问题)」，特别是其中“声音”部分的说明。通常，即使在完成上述所有任务之后，音频也不会在第一次重启后工作。你必须按照该部分中的具体说明来获取缓存中音频的 kexts。
 
-如有问题出现，可在「[问题报告](#问题报告)」中询问，但请不要附带所有的文件。
+如有问题出现，可在「[问题反馈](#问题反馈)」中询问，但请不要附带所有的文件。
 
 ### BIOS 模块兼容 WiFi 的安装
-这款笔记本的 BIOS 中含有 WiFi 白名单，为了使将要安装的 OS X 兼容无线网卡，，我们必须先攻克它。  
-更多信息请查看指南：http://www.tonymacx86.com/el-capitan-laptop-support/187340-guide-lenovo-g50-70-z50-70-bios-whitelist-removal.html
+这款笔记本的 BIOS 中含有 WiFi 白名单，为了使将要安装的 OS X 兼容无线网卡，我们必须先攻克它。  
+更多内容请查看指南：http://www.tonymacx86.com/el-capitan-laptop-support/187340-guide-lenovo-g50-70-z50-70-bios-whitelist-removal.html
 
 ### WiFi 使用 BCM94352Z
 `./download.sh` 和 `./install_downloads.sh` 脚本均已得到更新，并且会安装 BCM94352Z 必要的 kexts。
@@ -160,7 +160,7 @@ cp config.plist /Volumes/EFI/EFI/Clover/config.plist
 
 这张网卡近乎原生，它与原始 Mac（BCM4360）中的芯片相同，已认证 OOB<sup id="ref-6">[[6]](#note-6)</sup>，FakePCIID 可以使用与之相应的 AirPort 标识。在 macOS Sierra (10.12) 中，它不像 BCM4352 网卡那样需要 5GHz 或者 fcvo 补丁。
 
-并且 BCM943602BAED 还使用了最新蓝牙 4.1 技术...
+并且 BCM943602BAED 还使用了最新蓝牙 4.1 技术。
 
 ### 项目库的更新
 有时会更新一些有用的到远程项目库。所以，你可能需要更新你的副本，用来重新修补 DSDT/SSDT。
@@ -212,11 +212,11 @@ make install
     ```
     + 正常重启（如果需要，可以重启 2 次）
 
-- **声音**：外部的 headphone/mic 二合一插孔 的 mic 无法工作。
-- **CPU 频率**：Clover 识别的 CPU 速度（可以在“About this Mac”看到）不正确。在我的系统中（2.0GHz Core i7-4510u），它显示 2.59GHz。这似乎是修饰过的。你可以通过修改 `config.plist/CPU/FrequencyMHz` 来覆盖它。你会看到我的 `config.plist` 设置中已被注释，将它设置为适合你的 CPU。
+- **声音**：外部的 headphone/mic 二合一插孔的 mic 不能工作。
+- **CPU 频率**：Clover 识别的 CPU 速度（可以在“About this Mac”看到）不正确。在我的系统（2.0GHz Core i7-4510u）中，它显示 2.59GHz。这似乎是修饰过的。你可以通过修改 `config.plist/CPU/FrequencyMHz` 来覆盖它。你会看到我的 `config.plist` 设置中已被注释，重新设置它以适合你的 CPU。
 
 ### 完成安装后 其他任务
-- **触控板**：前往 SysPrefs->Trackpad 选择你喜欢的设置。
+- **触控板**：前往 SysPrefs->Trackpad 根据你的喜好设置它们。
 - **蓝牙**：如果弹出 Bluetooth Setup Assistant 窗口，前往 SysPrefs->Bluetooth->Advanced 取消所有选项。
 
 ### 问题反馈
