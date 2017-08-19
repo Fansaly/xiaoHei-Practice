@@ -133,7 +133,7 @@ sudo ./mount_efi.sh /
 ```shell
 cp config.plist /Volumes/EFI/EFI/Clover/config.plist
 ```
-将 config.plist 从仓库复制到 EFI/Clover/config.plist 之后，应自定义 SMBIOS，使它拥有了唯一的 serial。可以使用 Clover Configurator（使用 google 查找／下载 它）生成。***不要*** 使用 Clover Configurator 编辑真实的 config.plist，而是编辑一个“虚拟”的 config.plist 来存储 SMBIOS 数据，然后使用 plist 编辑器（我使用 Xcode）复制／粘贴 将 SMBIOS 部分复制到当前使用的 config.plist 中。Clover Configurator 有很多 bug，因此不要完全信任它对 config.plist 的编辑结果。本指南使用 MacBookAir6,2，不要使用其他型号。
+将 config.plist 从仓库复制到 EFI/Clover/config.plist 之后，应自定义 SMBIOS，使它拥有唯一的 serial。可以使用 Clover Configurator（使用 google 查找／下载 它）生成。***不要*** 使用 Clover Configurator 编辑真实的 config.plist，而是编辑一个“虚拟”的 config.plist 来存储 SMBIOS 数据，然后使用 plist 编辑器（我使用 Xcode）复制／粘贴 将 SMBIOS 部分复制到当前使用的 config.plist 中。Clover Configurator 有很多 bug，因此不要完全信任它对 config.plist 的编辑结果。本指南使用 MacBookAir6,2，不要使用其他型号。
 
 重申：***不要使用 Clover Configurator 编辑你的 config.plist***。它可能会从 config.plist 中删除重要的设置，导致异常。
 
