@@ -87,7 +87,7 @@ cd ~/Projects/z50.git
 
 要完成这一步设置，我们需要被正确修补的 DSDT/SSDT。
 
-此项目不会去修补 DSDT/SSDTs，而是使用 Clover 的 hotpatches 和一组较小的 SSDTs 来代替。
+此项目不会直接地去修补 DSDT/SSDTs，而是使用 Clover 的 hotpatches 和一组较小的 SSDTs 来代替。
 ```shell
 cd ~/Projects/z50.git
 make
@@ -108,8 +108,7 @@ cd ~/Projects/z50.git
 ./patch_edid.sh
 ```
 ### 电源管理
-在以上步骤中已经提供了 CPU/IGPU 电源管理所需的一切。  
-不再需要使用 ssdtPRgen.sh 脚本了。
+在以上步骤中已经提供了 CPU/IGPU 电源管理所需的一切。不再需要使用 ssdtPRgen.sh 脚本了。
 
 另外，请注意，hackintosh 不支持 _写入到磁盘_ 或 _S4_ 的休眠模式。
 
@@ -119,10 +118,10 @@ sudo pmset -a hibernatemode 0
 sudo rm /var/vm/sleepimage
 sudo mkdir /var/vm/sleepimage
 ```
-即使巧妙的使用了一个同名目录来帮助我们禁用它，但是系统更新后仍会重新启用它，因此在每次更新之后要检查休眠模式并禁用它。
+即使巧妙地使用了一个同名目录来帮助我们禁用它，但是系统更新后仍会重新启用，因此在每次更新之后要检查休眠模式并禁用它。
 
 ### 最终的 config.list
-直到现在，你一直在使用与安装相同的 config.plist。在所有 APCI 文件就绪之后（往前两部分<sup id="ref-5">[[5]](#note-5)</sup>），你可以使用 Z50 仓库中最终的 config.plist 文件了。
+直到现在，你一直在使用与安装时相同的 config.plist。在所有 ACPI 文件就绪之后（往前两部分<sup id="ref-5">[[5]](#note-5)</sup>），你可以使用 Z50 仓库中最终的 config.plist 文件了。
 
 首先，挂载 EFI 分区：
 ```shell
