@@ -4,7 +4,7 @@
 另附，以 Vue、iView 构建的 GitHub 上 maciasl patch 的预览
 
     修炼境界
-     macOS: macOS Sierra 10.12.6
+     macOS: macOS High Sierra 10.13
     SMBIOS: MacBookAir6,2
 
 [小黑](http://www.lenovo.com.cn/product/50081.html "LENOVO 小新 V2000 Bigger 版") | 示下
