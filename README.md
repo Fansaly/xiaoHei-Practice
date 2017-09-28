@@ -1,9 +1,8 @@
 ## 小黑修炼记
 
-本文旨在阐述『小黑』、『小白』多重境界的修炼，望有所助益  
-另附，以 Vue、iView 构建的 GitHub 上 maciasl patch 的预览
+此文记录了『小黑』通不懈努力终而成为『小白』的羽化历程。望对心怀相同梦想的『小黑』有所帮助。
 
-    修炼境界
+    『小黑』的畅想
      macOS: macOS High Sierra 10.13
     SMBIOS: MacBookAir6,2
 
@@ -21,7 +20,7 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
 
 ## 修炼途径
 - Ⓐ [热修补](patch_hotpatch.md)
-- Ⓑ [动手做](patch_static.md)
+- Ⓑ [动手做](patch_static/patch_static.md)
 
 **提示**：如果你已拥有与 Ⓐ 法现有 hotpatch 对应的相同设备，即可以此法修炼，否则请以 Ⓑ 法修炼，切记。
 
@@ -45,58 +44,11 @@ The end. Enjoy :innocent:
 
 &nbsp;
 
-## 项目文件
+## 项目
     .
-    ├── README.md
-    ├── build
-    │   ├── build.js
-    │   ├── check-versions.js
-    │   ├── dev-client.js
-    │   ├── dev-server.js
-    │   ├── utils.js
-    │   ├── vue-loader.conf.js
-    │   ├── webpack.base.conf.js
-    │   ├── webpack.dev.conf.js
-    │   └── webpack.prod.conf.js
-    ├── config
-    │   ├── dev.env.js
-    │   ├── index.js
-    │   └── prod.env.js
-    ├── index.html
-    ├── package.json
-    ├── patch_hotpatch.md
-    ├── patch_static.md
-    ├── patches
-    │   ├── README.md
-    │   ├── Replace Names.txt
-    │   ├── audio_HDEF-layout.txt
-    │   ├── battery_Lenovo-Z50-70.txt
-    │   ├── battery_Lenovo-v2000.txt
-    │   ├── fix_PSS.txt
-    │   ├── graphics_Haswell_0a260006.txt
-    │   ├── graphics_PNLF_haswell.txt
-    │   ├── graphics_Rename-B0D3.txt
-    │   ├── graphics_Rename-GFX0.txt
-    │   ├── misc_Haswell-LPC.txt
-    │   ├── rename_DSM.txt
-    │   ├── system_ADP1.txt
-    │   ├── system_IMEI.txt
-    │   ├── system_IRQ.txt
-    │   ├── system_OSYS_win8.txt
-    │   ├── system_RTC.txt
-    │   ├── system_SMBUS.txt
-    │   ├── system_WAK2.txt
-    │   └── usb_prw_0x6d_xhc.txt
-    ├── progress
-    ├── src
-    │   ├── Maciasl.vue
-    │   ├── components
-    │   │   ├── Breadcrumb.vue
-    │   │   ├── Clipboard.vue
-    │   │   ├── Context.vue
-    │   │   ├── Loading.vue
-    │   │   ├── MaciaslMenu.vue
-    │   │   └── maciasl.json
-    │   └── main.js
-    ├── static
-    └── whoami.jpg
+    ├── maciasl-view        # GitHub 上 macisal 的查看（以 Vue、iView 构建）
+    ├── patch_static        # 一种老旧的方法
+    ├── patch_hotpatch.md   # 方法/过程
+    ├── progress            # 完成度
+    ├── README.md           # README
+    └── whoami.jpg          # 预览
