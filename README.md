@@ -3,6 +3,7 @@
 .
 ├── Lenovo          # Lenovo 品牌机
 ├── maciasl-view    # GitHub 上 macisal 的查看（Vue、iView）
+├── updateArticle   # 译文更新模块（Node.js、ES6）
 └── whoami.jpg      # 小白（Strix/Lenovo）
 ```
 
