@@ -16,8 +16,8 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
 无线和蓝牙| Intel 3160 AC &nbsp;--<sup>更换为</sup>-->&nbsp; Broadcom BCM4352 802.11AC
 触控板 | ELAN
 
-## 修炼途径
-- [hotpatch](patch_hotpatch.md) -- 译文
+### 修炼
+- [hotpatch](patch_hotpatch.md) （译文）
 - [~~static~~](patch_static/patch_static.md)
 
 **提醒**：不推荐 ~~`static`~~ （早期）方法。
