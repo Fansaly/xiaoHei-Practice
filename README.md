@@ -3,7 +3,6 @@
 .
 ├── Strix           # ROG 攒机
 ├── Lenovo          # Lenovo 品牌机
-├── updateArticle   # 译文更新模块（Node.js、ES6）
 ├── maciasl-view    # GitHub 上 macisal 的查看（Vue、iView）
 └── whoami.jpg      # 小白（Strix/Lenovo）
 ```
