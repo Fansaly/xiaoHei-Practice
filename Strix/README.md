@@ -1,15 +1,16 @@
-```
-『小黑』的畅想
- macOS: macOS High Sierra 10.13
-```
-
-小黑 | 示下
+Strix | 配置
 :-: | -
-配置 | 准备中 ...
+主板 | ROG STRIX X299-E GAMING
+CPU | INTEL® CORE™ i7-7800X
+显卡 | ROG STRIX-GTX1080-A8G-GAMING
+内存 | CORSAIR VENGEANCE LPX DDR4 2400 16GB (8Gx2)
+硬盘 | SAMSUNG 960 EVO 500G M.2 NVMe
+水冷 | CORSAIR H100i V2
+电源 | CORSAIR RM650x
+鼠标 | LOGITECH G403
+键盘 | LOGITECH G413
+机箱 | JONSBO UMX4
 
-### 修炼
-[hotpatch](patch_hotpatch.md) （翻译中 ...）
 
-&nbsp;
-
-The end. Enjoy :innocent:
+### PATCH
+[hotpatch](patch_hotpatch.md) `译文 (部分) + 随笔` _完善中..._
