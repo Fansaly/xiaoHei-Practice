@@ -52,25 +52,25 @@
 一些安装用的工具，以及为了更容易打补丁而提供的脚本、工具，它们都在仓库：https://github.com/the-braveknight/Lenovo-X50-macOS
 
 首先，必须安装开发者工具。运行 Terminal 输入：
-```shell
+```bash
 git
 ```
 
 系统会提示你安装开发者工具。因为已经可以访问互联网了，因此选择下载并自动安装。  
 开发者工具安装完成之后，我们需要在本地创建一个 GitHub 上的项目的副本。
-```shell
+```bash
 mkdir ~/Projects
 cd ~/Projects
 git clone https://github.com/the-braveknight/Lenovo-X50-macOS lenovo.git
 ```
 接下来，安装更多的工具和所需要的 kext ...  
 下载 kext 和工具：
-```shell
+```bash
 cd ~/Projects/lenovo.git
 ./X50.sh --download-requirements
 ```
 安装：
-```shell
+```bash
 ./X50.sh --install-downloads
 ```
 
@@ -82,14 +82,14 @@ cd ~/Projects/lenovo.git
 要完成这一步，我们需要被打上正确补丁的 ACPI。
 
 对于 Z50-70/Z40-70 型号：
-```shell
+```bash
 cd ~/Projects/lenovo.git
 make
 make install_z50
 ```
 
 对于 G50-70/G40-70 型号：
-```shell
+```bash
 cd ~/Projects/lenovo.git
 make
 make install_g50
@@ -105,7 +105,7 @@ make install_g50
 此外，请注意，hackintosh 不支持 _写入到磁盘_ 或 _S4_ 的休眠模式。
 
 你需要禁用它：
-```shell
+```bash
 sudo pmset -a hibernatemode 0
 sudo rm /var/vm/sleepimage
 sudo mkdir /var/vm/sleepimage
@@ -115,7 +115,7 @@ sudo mkdir /var/vm/sleepimage
 ### 最终的 config.list
 到目前为止，一直使用的是用于安装的 config.plist。在所有 ACPI 文件就绪之后（往前两步），就可以使用 lenovo 仓库中的 config.plist 作为最终的 config.plist 了。
 
-```shell
+```bash
 cd ~/Projects/lenovo.git
 ./X50.sh --install-config
 ```
@@ -154,7 +154,7 @@ cd ~/Projects/lenovo.git
 时不时地，会将未来可用或优化设置更新到 lenovo 仓库。此时，你可能需要更新你的副本，用来重新给 ACPI 打补丁。
 
 缘于你使用 git, 所以这很简单 ...
-```shell
+```bash
 cd ~/Projects/lenovo.git
 git stash # to save any local changes you might have made
 git pull
@@ -197,7 +197,7 @@ make install_z50 # or make install_g50
     修复方法：
     + reboot without caches (在 Clover 界面按「空格键」，select without caches)
     + 重建缓存
-    ```shell
+    ```bash
     sudo touch /System/Library/Extensions && sudo kextcache -u /
     ```
     + 正常重启（如果需要，可以重启 2 次）
@@ -215,7 +215,7 @@ make install_z50 # or make install_g50
 如果你打算使用 APFS 文件系统，请不要忘记将 apfs.efi 添加到 `EFI/CLOVER/drivers64UEFI`。如果 **在 `drivers64UEFI` 中没有 apfs.efi，Clover 将无法识别 APFS** 启动卷。你可以在 `/usr/standalone/i386/apfs.efi` 找到 apfs.efi，位于 `"/Applications/Install macOS High Sierra.app/Contents/SharedSupport/BaseBinaries.dmg"`。
 
 但是，如果你想坚持使用 HFS+，你可以避免转换到 APFS。为此，请勿使用 Install macOS High Sierra.app 来启动安装程序。改用 `startosinstall`：
-```shell
+```bash
 /Applications/"Install macOS High Sierra.app"/Contents/Resources/startosinstall --converttoapfs NO
 ```
 
@@ -223,7 +223,7 @@ make install_z50 # or make install_g50
 下载 patchmatic：https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/RehabMan-patchmatic-2015-0107.zip  
 从 zip 中提取 patchmatic 二进制文件，复制它到 `/usr/bin/`。
 
-```shell
+```bash
 if [ -d ~/Downloads/RehabMan ]; then rm -R ~/Downloads/RehabMan; fi
 mkdir ~/Downloads/RehabMan
 cd ~/Downloads/RehabMan
@@ -236,7 +236,7 @@ patchmatic -extract
 同样地，上传 ioreg: https://www.tonymacx86.com/audio/58368-guide-how-make-copy-ioreg.html 请使用 IORegistryExplorer v2.1！***不要*** 回复其它版本的 IORegistryExplorer.app 生成的 ioreg。
 
 附带输出：
-```shell
+```bash
 kextstat|grep -y acpiplat
 kextstat|grep -y appleintelcpu
 kextstat|grep -y applelpc
@@ -246,7 +246,7 @@ kextstat|grep -y applehda
 同样地，上传 EFI/Clover 目录（在 Clover 主界面按 F4 键收集）。请剔除 themes 目录，特别是如果你安装了过多的主题时。
 
 并且，附带以下输出信息：
-```shell
+```bash
 sudo touch /System/Library/Extensions && sudo kextcache -u /
 ```
 
