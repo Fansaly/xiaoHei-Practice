@@ -26,7 +26,7 @@ CPU | INTEL® CORE™ i7-7800X
 
 - **/Advanced/CPU Configuration/**
   - Hyper Threading [ALL]: **Enabled**
-  - **MSR Lock Control: Enabled**
+  - **MSR Lock Control: Disabled**
 
 - **/Advanced/CPU Configuration/CPU Power Management Configuration/**
   - **Enhanced Intel Speed Step Technology (EIST): Enabled**
