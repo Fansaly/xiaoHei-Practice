@@ -62,8 +62,9 @@ CPU | INTEL® CORE™ i7-7800X
 - **/Boot/Secure Boot/**
   - OS Type: **Other OS**
 
-### Clover
+### CLOVER
 - drivers64UEFI
+  - [x] ApfsDriverLoader.efi
   - [x] AppleImageCodec-64.efi
   - [x] AppleKeyAggregator-64.efi
   - [x] AppleUITheme-64.efi
@@ -71,7 +72,6 @@ CPU | INTEL® CORE™ i7-7800X
   - [x] DataHubDxe-64.efi
   - [x] FirmwareVolume-64.efi
   - [x] FSInject-64.efi
-  - [x] apfs.efi
 - kexts/Other
   - [x] AppleALC.kext
   - [x] FakeSMC.kext
