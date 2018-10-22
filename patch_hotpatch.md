@@ -1,22 +1,21 @@
-> 译自：[[Guide] Lenovo Z50-70/Z40-70/G50-70/G40-70 using Clover UEFI](https://www.tonymacx86.com/threads/guide-lenovo-z50-70-z40-70-g50-70-g40-70-using-clover-uefi.232823/)  
+> 译自：[[Guide] Lenovo Z50-70/Z40-70/G50-70/G40-70 using Clover UEFI](https://www.tonymacx86.com/threads/guide-lenovo-z50-70-z40-70-g50-70-g40-70-using-clover-uefi.261787/)  
 > 作者：[the-braveknight](https://www.tonymacx86.com/members/the-braveknight.1466999/)  
-> 更于：Jan 16, 2018 at 8:54 PM
+> 更于：Oct 5, 2018 at 2:34 PM
 
 ---
 
 ### 概述
-此指南旨在引导在 Lenovo Z50-70<sup id="ref-1">[[1]](#note-1)</sup>/Z40-70 或者 G50-70/G40-70 笔记本电脑上，一步接一步地安装 High Sierra（ Sierra、El Capitan ）。
+此指南旨在引导在 Lenovo Z50-70<sup id="ref-1">[[1]](#note-1)</sup>/Z40-70 或者 G50-70/G40-70 笔记本电脑上，一步接一步地安装 Mojave（ High Sierra、Sierra、El Capitan ）。
 
-我的是一款搭载 Broadcom BCM943602BAED 无线网卡和 SSD 硬盘的 Z50-70 笔记本电脑。
+我的是一款搭载 Broadcom BCM94352Z 无线网卡和 SSD 硬盘的 Z50-70 笔记本电脑。
 
-或许你已经知道，Lenovo 的 BIOS 中含有 WiFi 白名单，在安装与 macOS 兼容的无线网卡之前，必须先攻克它。另一种可行性，在一些 lenovo 笔记本电脑 BIOS 白名单中已包含 AR9565，则可以直接安装使用它。安装脚本也已更新，并已支持 AR9656 无线网卡。
+或许你已经知道，Lenovo 的 BIOS 中含有 WiFi 白名单，在安装与 macOS 兼容的无线网卡之前，必须先攻克它。
 
 ### 所需设备
 - Lenovo Z50-70/Z40-70 或者 G50-70/G40-70
-- 在 Mac App Store 中下载 macOS High Sierra 或者 Sierra 亦或者 El Capitan
+- 在 Mac App Store 中下载 macOS Mojave 或者 High Sierra 或者 Sierra 亦或者 El Capitan
 - 8GB 的 U盘
-- （首选）原生支持 WiFi/BT 的 Broadcom BCM943602BAED 或者 BCM94352Z
-- 原生支持 WiFi 的 Atheros AR9565 (需要 Lilu.kext + ATH9KFixup.kext)
+- 支持原生 WiFi/BT 的 Broadcom BCM94352Z
 
 ### BIOS 设置
 恢复 BIOS 到默认状态，并确认
@@ -27,36 +26,36 @@
 提醒：如果你的笔记本电脑有独立显卡（Nvidia），请在 BIOS 中保持启用状态。它会在 macOS 运行时，被 SSDT-Z50.aml（或者 SSDT-G50.aml）自动禁用。
 
 ### 准备 USB、开始安装
-依照这篇指南创建 USB，并安装 Clover UEFI，这种方法创建的 USB 这款笔记本电脑：https://www.tonymacx86.com/el-capitan-laptop-support/148093-guide-booting-os-x-installer-laptops-clover.html
+依照这篇指南创建带有 Clover UEFI 的 USB 安装设备，该方法非常适合此款笔记本：https://www.tonymacx86.com/el-capitan-laptop-support/148093-guide-booting-os-x-installer-laptops-clover.html
 
 **特别提醒：**
-- 使用 `createinstallmedia` 方法。它可以很好的完成任务，几乎没有错误发生。> [[Guide] Booting the OS X Installers on LAPTOPS with Clover](https://www.tonymacx86.com/el-capitan-laptop-support/148093-guide-booting-os-x-installer-laptops-clover.html)
+- 使用 `createinstallmedia` 方法。可以很稳定地完成任务，几乎不会出错。> [[Guide] Booting the OS X Installers on LAPTOPS with Clover](https://www.tonymacx86.com/el-capitan-laptop-support/148093-guide-booting-os-x-installer-laptops-clover.html)
 
-- 一定要将 RealtekRTL8111.kext 复制到 `Clover/kexts/Other`，作为「[安装完成后](#安装完成后)」的网络支持是十分必要的。本指南的其余部分也依赖于它。另一种，可以复制 FakePCIID.kext 和 FakePCIID_Broadcom_WiFi.kext 到 `Clover/kexts/Other`。这将启用已安装好的兼容无线网卡。
+- 一定要将 RealtekRTL8111.kext 复制到 `Clover/kexts/Other`，作为「[安装完成后](#安装完成后)」必要的网络支持。本指南的其余部分同样也依赖于它才能完成。此外，也可以复制 FakePCIID.kext 和 FakePCIID_Broadcom_WiFi.kext 到 `Clover/kexts/Other`，这样可以启用已安装好的兼容无线网卡。
 
-    提醒：FakePCIID.kext 和 FakePCIID_Broadcom_WiFi.kext 在这里获取：https://github.com/RehabMan/OS-X-Fake-PCI-ID
+    提醒：FakePCIID.kext 和 FakePCIID_Broadcom_WiFi.kext 可从这里获取：https://github.com/RehabMan/OS-X-Fake-PCI-ID
 
-- 有一些笔记本使用的是 ELAN 触控板，因此 RehabMan 的 VoodoPS2Controller.kext 也许不能让它正常工作。可以从 Z50 仓库下载 ELAN 的 kext 以备用。
+- 因为有一些笔记本使用的是 ELAN 触控板，所以 RehabMan 的 VoodoPS2Controller.kext 或许不能使它正常工作，因此可从 Z50 仓库下载 ELAN 的 kext 以备用。
 
-- 自让 USB 良好工作的 AppleUSBXHCI.kext 诞生起，GenericUSBXHCI.kext 对于这款笔记本已不再必需。并且 GenericUSBXHCI.kext 在 10.11+ 上不能工作，因此不应该再使用它了。
+- 自让 USB 良好工作的 AppleUSBXHCI.kext 诞生起，GenericUSBXHCI.kext 对于这款笔记本已不再是必需的了，并且 GenericUSBXHCI.kext 在 10.11+ 上不能正常工作，因此不应该再使用它了。
 
-- 使用 Lenovo 仓库的 config_install.plist：https://github.com/the-braveknight/Lenovo-X50-macOS
+- 使用 Lenovo 仓库提供的 config_install.plist：https://github.com/the-braveknight/Lenovo-X50-macOS
 
 ### 安装完成后
 按照上一节提到的指南（post #2）中的描述安装 Clover UEFI。之后，安装 Clover 并正确配置（config.plist，kexts 等），就可以从 HDD/SSD 启动了。
 
-但仍然有许多的问题和设备无法正常工作。为此，我们需要修补 DSDT，提供一个合适的 config.plist，并安装所需的 kext。
+但仍然有许多问题和无法正常工作的设备。为此，我们需要修补 DSDT、提供一个合适的 config.plist，以及安装所需的 kext。
 
-因为已由 Clover 注入了 RealtekRTL8111.kext，因此只需使用网线连接到路由器即可访问互联网。插入网线，并确保可以访问互联网后，再继续。同样，如果你使用了 FakePCIID_Broadcom_WiFi.kext，那么可以在连接到 WiFi 路由器后继续。
+因为已由 Clover 注入了 RealtekRTL8111.kext，所以现在只需使用网线连接到路由器即可访问互联网。插入网线，并确保可以访问互联网后，再继续之后的任务。同样，如果你使用了 FakePCIID_Broadcom_WiFi.kext，那么可以在连接到 WiFi 路由器后继续。
 
-一些安装用的工具，以及为了更容易打补丁而提供的脚本、工具，它们都在仓库：https://github.com/the-braveknight/Lenovo-X50-macOS
+这里有一些安装用的工具，和为了更容易打补丁而提供的脚本、工具：https://github.com/the-braveknight/Lenovo-X50-macOS
 
 首先，必须安装开发者工具。运行 Terminal 输入：
 ```bash
 git
 ```
 
-系统会提示你安装开发者工具。因为已经可以访问互联网了，因此选择下载并自动安装。  
+系统会提示你安装开发者工具。因为已经可以访问互联网了，所以选择下载并自动安装。  
 开发者工具安装完成之后，我们需要在本地创建一个 GitHub 上的项目的副本。
 ```bash
 mkdir ~/Projects
@@ -74,10 +73,10 @@ cd ~/Projects/lenovo.git
 ./X50.sh --install-downloads
 ```
 
-`--download-requirements` 参数将自动从 bitbucket、github 收集最新版本的工具（patchmatic、iasl、MaciASL）和 kext（FakeSMC.kext、ACPIBatteryManager.kext，等等），以及从 [RehabMan's repo](https://github.com/RehabMan/OS-X-Clover-Laptop-Config) 获取所需要的 hotpatch SSDTs。  
-`--install-downloads` 参数会自动将它们安装到正确位置。
+`--download-requirements` 参数让脚本将自动从 bitbucket、github 收集最新版本的工具（patchmatic、iasl、MaciASL）和 kext（FakeSMC.kext、ACPIBatteryManager.kext，等等），以及从 [RehabMan's repo](https://github.com/RehabMan/OS-X-Clover-Laptop-Config) 获取所需要的 hotpatch SSDTs。  
+`--install-downloads` 参数让脚本会自动将它们安装到正确位置。
 
-如果你愿意，可以重启笔记本电脑，以验证更多的硬件已经正常工作（很多只是部分）。
+如果你愿意，现在可以重启笔记本电脑，以验证更多的硬件已经正常工作（很多只是部分）。
 
 要完成这一步，我们需要被打上正确补丁的 ACPI。
 
@@ -97,7 +96,7 @@ make install_g50
 
 `make` 用来编译打好补丁的文件（需要 iasl），生成的文件位于目录 `./build`。
 
-最后的 `make install_z50`（或者 `make install_g50`），先是挂载 EFI 分区，再复制编译生成的文件到 `EFI/Clover/ACPI/patched` 以使 Clover 加载它们。
+最终的 `make install_z50`（或者 `make install_g50`），先是挂载 EFI 分区，再复制编译生成的文件到 `EFI/Clover/ACPI/patched` 以使 Clover 加载它们。
 
 ### 电源管理
 以上步骤已经安装了 CPU/IGPU 电源管理所需的一切。不再需要使用 ssdtPRgen.sh 脚本了。
@@ -110,17 +109,17 @@ sudo pmset -a hibernatemode 0
 sudo rm /var/vm/sleepimage
 sudo mkdir /var/vm/sleepimage
 ```
-即使巧妙地使用了一个同名目录来帮助我们禁用它，但是系统每次更新后往往会重新启用它，因此在更新完成之后需要检查并禁用它。
+即使我们巧妙地使用了一个同名的目录来帮助我们禁用它，但是每当系统更新后往往会重新启用它，因此每次系统更新完成之后都需要检查并禁用它。
 
 ### 最终的 config.list
-到目前为止，一直使用的是用于安装的 config.plist。在所有 ACPI 文件就绪之后（往前两步），就可以使用 lenovo 仓库中的 config.plist 作为最终的 config.plist 了。
+直到现在，使用的都是安装时的 config.plist。在所有 ACPI 文件就绪之后（往前两步），就可以使用 lenovo 仓库中的 config.plist 作为最终的 config.plist 了。
 
 ```bash
 cd ~/Projects/lenovo.git
 ./X50.sh --install-config
 ```
 
-将 config.plist 从仓库复制到 `EFI/Clover/config.plist` 之后，应该自定义 SMBIOS，使它拥有唯一的 Serial。可以使用 Clover Configurator（使用 google 查找／下载 它）生成。***不要*** 使用 Clover Configurator 编辑实际使用的 config.plist，而是编辑一个“傀儡” config.plist 来存储 SMBIOS 数据，然后使用 plist 编辑器（我使用的 Xcode）复制／粘贴 将 SMBIOS 部分复制到实际使用的 config.plist 中。Clover Configurator 有太多的 bug，不能信任它对 config.plist 的编辑结果。本指南使用 MacBookAir6,2，不要使用其他型号。
+将 config.plist 从仓库复制到 `EFI/Clover/config.plist` 之后，应该自定义 SMBIOS，使它拥有唯一的 Serial。可以使用 Clover Configurator（使用 google 查找／下载 它）生成。***不要*** 使用 Clover Configurator 编辑实际使用的 config.plist，而是编辑一个“暂存” config.plist 来存储 SMBIOS 数据，然后使用 plist 编辑器（我使用的 Xcode）复制／粘贴 将 SMBIOS 部分复制到实际使用的 config.plist 中。Clover Configurator 有太多的 bug，不能信任它对 config.plist 的编辑结果。本指南使用 MacBookAir6,2，不要使用其他型号。
 
 重申：***不要使用 Clover Configurator 编辑你的 config.plist***。它可能会删除 config.plist 中的重要设置，导致异常。
 
@@ -131,33 +130,27 @@ cd ~/Projects/lenovo.git
 
 请务必查看「[已知问题](#已知问题)」，特别是其中“音频”部分的说明。通常，即使在完成上述所有任务之后，声卡也不会在第一次重启后工作。你必须依照该部分中的具体说明，才能获取缓存中声卡对应的 kext。
 
-如有问题出现，附上必要的文件，在「[问题反馈](#问题反馈)」中询问，如果没有“文件”，请不要打扰我。
+如有问题出现，附上必要的文件，在「[问题反馈](#问题反馈)」中询问，如果没有“要求的文件”，那么请不要打扰我。
 
 ### BIOS 修改 - 为了安装可兼容的无线网卡
 这款笔记本的 BIOS 中含有 WiFi 白名单，在安装与 macOS 兼容的无线网卡之前，必须先攻克它。  
 详细内容请查看指南：https://www.tonymacx86.com/el-capitan-laptop-support/187340-guide-lenovo-g50-70-z50-70-bios-whitelist-removal.html
 
-### WiFi - BCM94352Z
+### WiFi - BCM94352Z (DW1560)
 仓库中的脚本均已得到更新，并且会安装 BCM94352Z 所必需的 kext。
 
 ### WiFi - BCM943602BAED (DW1830)
 这张网卡几乎和原生的一摸一样，它与原始 Mac（Bcm4360）中的芯片相同，已经过 OOB<sup id="ref-2">[[2]](#note-2)</sup> 的验证，FakePCIID 就可以获取到它的 AirPort 标识。在 macOS Sierra (10.12) 中，它不像 Bcm4352 网卡那样需要 5GHz 或者 fcvo 补丁。
 
-### WiFi - Atheros AR9565
-初步为那些不想给 BIOS 提取／打补丁 的，提供 ATH9KFixup.kext，以驱动的一些可以使用 Atheros AR9565 无线网卡的 lenovo 笔记本电脑。
-
-仓库中的脚本已修正，以便为 Broadcom（BCM94352Z 或 BCM943602BAED）和 Atheros AR9565 无线网卡安装所需要的 kext。
-
-注意：AR9565 无线网卡的蓝牙目前不被 macOS 支持。
+注意：此卡需要设置第三个天线才能正常工作。
 
 ### 项目库的更新
-时不时地，会将未来可用或优化设置更新到 lenovo 仓库。此时，你可能需要更新你的副本，用来重新给 ACPI 打补丁。
+时不时地，会将未来可用或优化设置更新到 lenovo 仓库。此时，你可能需要更新你的副本，用来给 ACPI 重新打补丁。
 
 缘于你使用 git, 所以这很简单 ...
 ```bash
 cd ~/Projects/lenovo.git
-git stash # to save any local changes you might have made
-git pull
+./X50.sh --update # to save any local changes you might have made and update repo to latest
 ./X50.sh --download-requirements
 ./X50.sh --install-downloads
 ./X50.sh --update-config
@@ -192,7 +185,7 @@ make install_z50 # or make install_g50
 ### 已知问题
 - **Find My Mac/Locking**：查找我的 Mac 不能正常工作。不要锁定你的 Mac，因为很难（或者不可能）解锁。
 - **睡眠／唤醒后 WiFi 连接迟缓**：在 SysPrefs->Energy Saver 禁用 "Wake for network access"。
-- **音频**：在初始安装或者新增、更新 kext 之后，可能导致声音丢失。
+- **音频**：在初次安装或者新增、更新 kext 之后，可能导致声卡未加载。
 
     修复方法：
     + reboot without caches (在 Clover 界面按「空格键」，select without caches)
@@ -200,24 +193,13 @@ make install_z50 # or make install_g50
     ```bash
     sudo touch /System/Library/Extensions && sudo kextcache -u /
     ```
-    + 正常重启（如果需要，可以重启 2 次）
+    + 正常重启（如果需要，可以重启多次）
 
-- **音频**：~~通过 headphone/mic 二合一插孔外接的 mic 不能工作。~~ 使用 CodecCommander.kext + ACPI 配置，现在外部麦克风可以很好地工作。
 - **CPU 频率**：Clover 识别的 CPU 速度（可以在 About This Mac 看到）不正确。在我的系统中（2.0GHz Core i7-4510u），它显示 2.59GHz。这似乎是修饰过的。可以通过修改 `config.plist/CPU/FrequencyMHz` 来覆盖它。你会看到在 `config.plist` 中我已把它注释掉了，启用并设置它以适合你的 CPU。
 
 ### 安装完成后 其他任务
 - **触控板**：一定要前往 SysPrefs->Trackpad 查看，并根据你的喜好设置它们。
 - **蓝牙**：如果弹出 Bluetooth Setup Assistant 窗口，前往 SysPrefs->Bluetooth->Advanced 取消所有选项。
-
-### 升级到 High Sierra
-正如你可能已经知道的那样，High Sierra 有一个叫做 APFS 的新文件系统。在 SSD 驱动器上，如果以默认方式启动 High Sierra 安装程序（例如，运行 `/Applications/Install macOS High Sierra.app`），将自动转换为 APFS 文件系统。
-
-如果你打算使用 APFS 文件系统，请不要忘记将 apfs.efi 添加到 `EFI/CLOVER/drivers64UEFI`。如果 **在 `drivers64UEFI` 中没有 apfs.efi，Clover 将无法识别 APFS** 启动卷。你可以在 `/usr/standalone/i386/apfs.efi` 找到 apfs.efi，位于 `"/Applications/Install macOS High Sierra.app/Contents/SharedSupport/BaseBinaries.dmg"`。
-
-但是，如果你想坚持使用 HFS+，你可以避免转换到 APFS。为此，请勿使用 Install macOS High Sierra.app 来启动安装程序。改用 `startosinstall`：
-```bash
-/Applications/"Install macOS High Sierra.app"/Contents/Resources/startosinstall --converttoapfs NO
-```
 
 ### 问题反馈
 下载 patchmatic：https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/RehabMan-patchmatic-2015-0107.zip  
@@ -245,7 +227,7 @@ kextstat|grep -y applehda
 
 同样地，上传 EFI/Clover 目录（在 Clover 主界面按 F4 键收集）。请剔除 themes 目录，特别是如果你安装了过多的主题时。
 
-并且，附带以下输出信息：
+并附带以下输出信息：
 ```bash
 sudo touch /System/Library/Extensions && sudo kextcache -u /
 ```
