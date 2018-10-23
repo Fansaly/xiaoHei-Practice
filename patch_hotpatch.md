@@ -132,12 +132,12 @@ cd ~/Projects/lenovo.git
 
 如有问题出现，附上必要的文件，在「[问题反馈](#问题反馈)」中询问，如果没有“要求的文件”，那么请不要打扰我。
 
-### BIOS 修改 - 为了安装可兼容的无线网卡
+### BIOS 模块修改 - 为了安装使用兼容的无线网卡
 这款笔记本的 BIOS 中含有 WiFi 白名单，在安装与 macOS 兼容的无线网卡之前，必须先攻克它。  
 详细内容请查看指南：https://www.tonymacx86.com/el-capitan-laptop-support/187340-guide-lenovo-g50-70-z50-70-bios-whitelist-removal.html
 
 ### WiFi - BCM94352Z (DW1560)
-仓库中的脚本均已得到更新，并且会安装 BCM94352Z 所必需的 kext。
+仓库中的脚本均已更新，并且会安装 BCM94352Z 所必需的 kext。
 
 ### WiFi - BCM943602BAED (DW1830)
 这张网卡几乎和原生的一摸一样，它与原始 Mac（Bcm4360）中的芯片相同，已经过 OOB<sup id="ref-2">[[2]](#note-2)</sup> 的验证，FakePCIID 就可以获取到它的 AirPort 标识。在 macOS Sierra (10.12) 中，它不像 Bcm4352 网卡那样需要 5GHz 或者 fcvo 补丁。
@@ -161,7 +161,7 @@ make install_z50 # or make install_g50
 
 &nbsp;
 
-### 正常使用
+### 正常运行
 - [x] UEFI 启动 通过 Clover
 - [x] 内建 键盘（Fn 功能键可用）
 - [x] 内建 触控板（基本手势）
@@ -201,6 +201,8 @@ make install_z50 # or make install_g50
 - **触控板**：一定要前往 SysPrefs->Trackpad 查看，并根据你的喜好设置它们。
 - **蓝牙**：如果弹出 Bluetooth Setup Assistant 窗口，前往 SysPrefs->Bluetooth->Advanced 取消所有选项。
 
+&nbsp;
+
 ### 问题反馈
 下载 patchmatic：https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/RehabMan-patchmatic-2015-0107.zip  
 从 zip 中提取 patchmatic 二进制文件，复制它到 `/usr/bin/`。
@@ -239,5 +241,5 @@ RehabMan for his repos, tools, guides, and scripts.
 
 
 ---
-1. <a id="note-1" href="#ref-1">^</a> 译者：多方考证，『小黑』与它近乎孪生，遂译此文  
-2. <a id="note-2" href="#ref-2">^</a> 查看：http://www.insanelymac.com/forum/topic/284989-what-does-oob-mean/
+1. <a id="note-1" href="#ref-1">^</a> 译者注: 多方考证，『小黑』与它近乎孪生，遂译此文  
+2. <a id="note-2" href="#ref-2">^</a> 请查看: http://www.insanelymac.com/forum/topic/284989-what-does-oob-mean/
