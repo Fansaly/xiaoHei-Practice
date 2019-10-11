@@ -16,4 +16,4 @@ CPU | Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz `可睿频至 3.1GHz`
 
 &nbsp;
 
-![whoami ^\_^](whoami.jpg)
+![whoami ^\_^](whoami.png)
