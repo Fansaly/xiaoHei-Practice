@@ -1,3 +1,5 @@
+可移步至 [Lenovo-V2000-macOS](https://github.com/Fansaly/Lenovo-V2000-macOS) 阅读最新指南。
+
 [小黑](http://www.lenovo.com.cn/product/50081.html "LENOVO 小新 V2000 Bigger 版") | 配置
 :-: | -
 主板 | Lenovo Lancer 5A5 `BIOS Version: 9BCN29WW`
